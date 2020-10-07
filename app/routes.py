@@ -5,5 +5,15 @@ from app import app
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hellos World!"
+    user = {"name": "Coco"}
+    return '''
+    <html>
+        <head>
+            <title>Homepage - Mega Flask</title>
+        </head>
+        <body>
+            <h1>Hello there ''' + user["name"] + '''! </h1>
+        </body>
+    </html>
+    '''
 
