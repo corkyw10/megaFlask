@@ -1,3 +1,4 @@
+from flask import render_template
 from app import app
 
 # Python function decorators.
@@ -6,14 +7,5 @@ from app import app
 @app.route('/index')
 def index():
     user = {"name": "Coco"}
-    return '''
-    <html>
-        <head>
-            <title>Homepage - Mega Flask</title>
-        </head>
-        <body>
-            <h1>Hello there ''' + user["name"] + '''! </h1>
-        </body>
-    </html>
-    '''
+    return render_template('index.html', title="Home", user=user)
 
