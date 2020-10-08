@@ -1,0 +1,14 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Mega Flask</title>
+        {% else %}
+        <title>Welcome to Mega Flask</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Mega Flask: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
