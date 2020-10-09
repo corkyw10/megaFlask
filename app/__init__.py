@@ -12,7 +12,12 @@ app.config.from_object(Config)
 # most flask extensions are initialised as so:
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+# Initialise login and have non logged in users redirect to login view if they try to access
+# a page that requires authentication
 login = LoginManager(app)
+login.login_view = 'login'
+
 # model module defines the structure of the database
 from app import routes, models
 
