@@ -2,7 +2,7 @@ from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from flask_login import LoginManager
 
 # Create an instance of Flask
 # __name__ is a predefined Python variable that refers to the name of the module in which it is used
@@ -12,6 +12,7 @@ app.config.from_object(Config)
 # most flask extensions are initialised as so:
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+login = LoginManager(app)
 # model module defines the structure of the database
 from app import routes, models
 
