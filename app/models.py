@@ -19,6 +19,13 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+    #todo
+    #add avatar to registration process
+    def avatar(self):
+        avatar = "avatars/{}.jpeg".format(self.username)
+        return avatar
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))

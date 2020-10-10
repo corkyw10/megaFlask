@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>User: {{ user.username }}</h1>
+    <table>
+        <tr valign="top">
+            <td><img src="{{ url_for('static', filename=user.avatar()) }}" alt="Avatar for {{ user.username }}" width="120" height="120"></td>
+            <td><h1>User: {{ user.username }}</h1></td>
+        </tr>
+    </table>
     <hr>
     {% for post in posts %}
-    <p>
-        {{ post.author.username }} says: {{ post.body }}<br>
-    </p>
+    <table>
+        <tr valign="top">
+        <td><img src="{{ url_for('static', filename=user.avatar()) }}" alt="Avatar for {{ user.username }}" width="36" height="36"></td>
+        <td>{{ post.author.username }} says: {{ post.body }}<br></td>
+        </tr>
+    </table>
     {% endfor %}
 {% endblock %}
