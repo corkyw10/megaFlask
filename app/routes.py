@@ -63,3 +63,13 @@ def register():
         flash('Congratulations Ranger! You can now enter the Command Center')
         return redirect(url_for('login'))
     return render_template('register.html', title='Join the Mighty Morphin Power Rangers', form=form)
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Mighty Morphin!'},
+        {'author': user, 'body': 'Power Rangers!'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
