@@ -1,9 +1,17 @@
+from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from app.models import User
 from werkzeug.urls import url_parse
+
+@app.before_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        # User loader callback has already run a db query to put target user in db session
+        db.session.commit()
 
 # Python function decorators.
 # in this case they register the function as a callback for a certain event, eg. hitting the URL "/" or "/index"
