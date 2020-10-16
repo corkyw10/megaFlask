@@ -47,6 +47,18 @@ class User(UserMixin, db.Model):
             followers.c.followed_id == user.id
         ).count() > 0
 
+    def followed_posts(self):
+        # Joins post and followers where followed id is the same as post id
+        # filters posts by user being followed by current user
+        followed = Post.query.join(
+            followers, (followers.c.followed_id == Post.user_id)).filter(
+            followers.c.follower_id == self.id)
+        # Query posts for current users posts
+        own = Post.query.filter_by(user_id=self.id)
+        # Returns combined followed user posts and current user posts with most recent first
+        return followed.union(own).order_by(Post.timestamp.desc())
+
+
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
